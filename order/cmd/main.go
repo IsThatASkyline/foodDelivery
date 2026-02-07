@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/adapters/postgres"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/config"
-	api "github.com/IsThatASkyline/foodDelivery/order/internal/delivery/http"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/order"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/order/adapters/postgres"
+	server "github.com/IsThatASkyline/foodDelivery/order/internal/server/http"
+	"github.com/jackc/pgx/v5/stdlib"
+	"github.com/pressly/goose"
 	"log"
 	"os/signal"
 	"syscall"
@@ -26,23 +29,18 @@ func main() {
 	defer db.Close()
 	log.Println("db Pool has been initialized")
 
-	//connForMigrations := stdlib.OpenDBFromPool(incomeDB)
-	//if err = goose.Up(connForMigrations, cfg.IncomeDB.MigrationPath); err != nil {
-	//	log.Fatalf("failed to run migrations: %s", err)
-	//}
+	connForMigrations := stdlib.OpenDBFromPool(db)
+	if err = goose.Up(connForMigrations, cfg.DB.MigrationPath); err != nil {
+		log.Fatalf("failed to run migrations: %s", err)
+	}
 
 	// Создаем приложение
-	app := api.NewApp()
-
-	// Прокидываем зависимости
-	provider, err := api.NewProvider(db)
-	if err != nil {
-		log.Fatalf("failed to initialize provider: %s", err)
-	}
-	provider.SetupDependencies(app)
+	app := server.NewApp()
 
 	// Устанавливаем все роуты
-	app.SetupRoutes()
+	app.SetupRoutes(
+		order.NewModule(db),
+	)
 
 	// Запускаем сервер
 	app.StartServe(ctx)
