@@ -1,8 +1,8 @@
 package order
 
 import (
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order/application/dto"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/order/delivery/http/v1/handlers/common"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/order/delivery/http/v1/handlers/order/requests"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/order/delivery/http/v1/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -11,13 +11,13 @@ import (
 func (h *OrderHandler) CreateOrder(ctx *gin.Context) {
 	const op = "order.delivery.http.GetMenuItems" //TODO: gowrap
 
-	var in dto.CreateOrder
-	if err := ctx.ShouldBindJSON(&in); err != nil {
+	var req requests.CreateOrder
+	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	data, err := h.orderUseCase.CreateOrder(ctx, in)
+	data, err := h.orderUseCase.CreateOrder(ctx, req.ToDTO())
 	if err != nil {
 		middleware.MapErrors(ctx, err) //TODO: middleware
 		return

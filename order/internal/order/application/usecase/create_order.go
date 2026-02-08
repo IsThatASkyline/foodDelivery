@@ -43,8 +43,6 @@ func (uc *OrderUseCase) CreateOrder(ctx context.Context, order dto.CreateOrder) 
 			return err
 		}
 
-		//TODO: trigger Kitchen to start processing the order
-
 		return nil
 	})
 	if err != nil {

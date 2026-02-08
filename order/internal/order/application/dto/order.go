@@ -3,12 +3,12 @@ package dto
 import "github.com/google/uuid"
 
 type CreateOrder struct {
-	Items []OrderItem `json:"items" binding:"required"`
+	Items []OrderItem
 }
 
 type OrderItem struct {
-	ID       int64 `json:"id"`
-	Quantity int64 `json:"quantity"`
+	ID       int64
+	Quantity int64
 }
 
 type CreateOrderInDB struct {
