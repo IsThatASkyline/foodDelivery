@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/accounting"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/config"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/order"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/order/adapters/postgres"
@@ -40,6 +41,7 @@ func main() {
 	// Устанавливаем все роуты
 	app.SetupRoutes(
 		order.NewModule(db),
+		accounting.NewModule(db),
 	)
 
 	// Запускаем сервер
