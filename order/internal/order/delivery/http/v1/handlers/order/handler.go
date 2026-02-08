@@ -9,6 +9,7 @@ import (
 type orderUseCase interface {
 	CreateOrder(ctx context.Context, order dto.CreateOrder) (uuid.UUID, error)
 	GetMenuItems(ctx context.Context) ([]dto.MenuItem, error)
+	GetOrderByID(ctx context.Context, id uuid.UUID) (dto.Order, error)
 }
 
 type OrderHandler struct {

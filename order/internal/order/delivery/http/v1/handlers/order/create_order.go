@@ -9,7 +9,7 @@ import (
 )
 
 func (h *OrderHandler) CreateOrder(ctx *gin.Context) {
-	const op = "order.delivery.http.GetMenuItems" //TODO: gowrap
+	const op = "order.delivery.http.CreateOrder" //TODO: gowrap
 
 	var req requests.CreateOrder
 	if err := ctx.ShouldBindJSON(&req); err != nil {

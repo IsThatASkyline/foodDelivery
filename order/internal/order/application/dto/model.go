@@ -6,15 +6,17 @@ import (
 
 type Order struct {
 	ID            uuid.UUID
-	Products      []Product
+	Items         []Item
 	TotalPrice    int64
+	Status        string
 	PaymentMethod string
 	Customer      Customer
 	Delivery      Delivery
 }
 
-type Product struct {
+type Item struct {
 	ID         int64
+	Name       string
 	Quantity   int
 	TotalPrice int64
 }

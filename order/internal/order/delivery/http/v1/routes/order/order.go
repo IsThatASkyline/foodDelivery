@@ -7,6 +7,7 @@ import (
 
 func Setup(routerGroup *gin.RouterGroup, orderHandler *order.OrderHandler) {
 	routerGroup.POST("", orderHandler.CreateOrder)
+	routerGroup.GET("/:id", orderHandler.GetOrderByID)
 
 	routerGroup.GET("/menu", orderHandler.GetMenuItems)
 }
