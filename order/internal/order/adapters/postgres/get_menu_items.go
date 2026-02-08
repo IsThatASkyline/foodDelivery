@@ -13,7 +13,7 @@ func (s *storage) GetMenuItems(ctx context.Context) ([]dto.MenuItem, error) {
 		`
 	SELECT id, name, price FROM orders.menu_items
 `
-	rows, err := s.db.Query(ctx, query)
+	rows, err := s.getDB(ctx).Query(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}
@@ -25,6 +25,7 @@ func (s *storage) GetMenuItems(ctx context.Context) ([]dto.MenuItem, error) {
 		if err := rows.Scan(&item.ID, &item.Name, &item.Price); err != nil {
 			return nil, fmt.Errorf("%s: %w", op, err)
 		}
+
 		resp = append(resp, item)
 		if rows.Err() != nil {
 			return nil, fmt.Errorf("%s: %w", op, err)

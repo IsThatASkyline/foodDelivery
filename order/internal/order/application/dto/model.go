@@ -14,9 +14,9 @@ type Order struct {
 }
 
 type Product struct {
-	ID       int64
-	Quantity int
-	Price    int64
+	ID         int64
+	Quantity   int
+	TotalPrice int64
 }
 
 type Customer struct {

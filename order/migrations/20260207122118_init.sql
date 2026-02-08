@@ -19,6 +19,7 @@ CREATE TABLE orders.order_items (
     order_id UUID NOT NULL,
     menu_item_id BIGINT NOT NULL,
     quantity INTEGER NOT NULL,
+    total_price BIGINT NOT NULL,
 
     CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders.orders (id),
     CONSTRAINT fk_menu_item FOREIGN KEY (menu_item_id) REFERENCES orders.menu_items (id)

@@ -16,8 +16,9 @@ type module struct {
 }
 
 func NewModule(db *pgxpool.Pool) *module {
+	txManager := postgres.NewTransactionRepo(db)
 	orderStorage := postgres.NewStorage(db)
-	orderUseCase := usecase.NewOrderUseCase(orderStorage)
+	orderUseCase := usecase.NewOrderUseCase(orderStorage, txManager)
 	orderV1Handler := orderV1Handlers.NewOrderHandler(orderUseCase)
 
 	return &module{

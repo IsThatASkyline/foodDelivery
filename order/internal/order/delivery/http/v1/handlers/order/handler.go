@@ -3,10 +3,11 @@ package order
 import (
 	"context"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/order/application/dto"
+	"github.com/google/uuid"
 )
 
 type orderUseCase interface {
-	CreateOrder(ctx context.Context) error
+	CreateOrder(ctx context.Context, order dto.CreateOrder) (uuid.UUID, error)
 	GetMenuItems(ctx context.Context) ([]dto.MenuItem, error)
 }
 

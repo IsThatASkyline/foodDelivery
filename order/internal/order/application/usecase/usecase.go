@@ -1,13 +1,13 @@
 package usecase
 
-import "github.com/IsThatASkyline/foodDelivery/order/internal/order/application/interface"
-
 type OrderUseCase struct {
-	storage _interface.Storage
+	storage   Storage
+	txManager TxManager
 }
 
-func NewOrderUseCase(storage _interface.Storage) *OrderUseCase {
+func NewOrderUseCase(storage Storage, txManager TxManager) *OrderUseCase {
 	return &OrderUseCase{
-		storage: storage,
+		storage:   storage,
+		txManager: txManager,
 	}
 }
