@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN apk add --no-cache ca-certificates
 
-COPY ../go.mod go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
@@ -20,6 +20,7 @@ FROM scratch
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 COPY --from=builder /app/app /app
+COPY --from=builder /app/migrations /migrations
 
 USER 1001
 
