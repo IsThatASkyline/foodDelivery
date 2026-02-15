@@ -9,7 +9,7 @@ type Config struct {
 	App AppConfig
 	DB  struct {
 		ConnectionString string `envconfig:"DSN" required:"true"`
-		MigrationPath    string `envconfig:"MIGRATION_PATH" default:"/opt/migrations"`
+		MigrationPath    string `envconfig:"MIGRATION_PATH" default:"/app/migrations"`
 	}
 }
 
