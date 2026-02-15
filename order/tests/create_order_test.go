@@ -2,9 +2,9 @@ package tests
 
 import (
 	"context"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order/adapters/postgres"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order/application/dto"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order/application/usecase"
+	postgres2 "github.com/IsThatASkyline/foodDelivery/order/internal/domain/order/adapters/postgres"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/domain/order/application/dto"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/domain/order/application/usecase"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 	"testing"
@@ -17,8 +17,8 @@ func TestOrderUseCase_CreateOrder(t *testing.T) {
 	require.NoError(t, err)
 	defer cleanup()
 
-	storage := postgres.NewStorage(db)
-	txManager := postgres.NewTransactionRepo(db)
+	storage := postgres2.NewStorage(db)
+	txManager := postgres2.NewTransactionRepo(db)
 	uc := usecase.NewOrderUseCase(storage, txManager)
 
 	order := dto.CreateOrder{

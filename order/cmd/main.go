@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/accounting"
 	"github.com/IsThatASkyline/foodDelivery/order/internal/config"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order"
-	"github.com/IsThatASkyline/foodDelivery/order/internal/order/adapters/postgres"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/domain/accounting"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/domain/order"
+	"github.com/IsThatASkyline/foodDelivery/order/internal/domain/order/adapters/postgres"
 	server "github.com/IsThatASkyline/foodDelivery/order/internal/server/http"
 	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/pressly/goose"
