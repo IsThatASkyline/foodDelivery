@@ -8,13 +8,13 @@ services:
     environment:
       DSN: postgresql://order_user:order_password@postgresql:5432/order_db
     ports:
-      - "8080:8080"
+      - "8085:8080"
     restart: unless-stopped
 
   postgresql:
     image: postgres:16-alpine
     volumes:
-      - ./order/postgres_data:/var/lib/postgresql/data
+      - ./order/postgres_data:/var/lib/postgresql/data #TODO: переделать на volume
     environment:
       POSTGRES_USER: order_user
       POSTGRES_PASSWORD: order_password
