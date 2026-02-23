@@ -30,7 +30,7 @@ func (h *OrderHandler) GetOrderByID(ctx *gin.Context) {
 		middleware.MapErrors(ctx, err) //TODO: middleware
 		return
 	}
-	data.PaymentMethod = "card"
+	data.PaymentMethod = "cash"
 	ctx.JSON(http.StatusOK, common.Response{
 		Status: http.StatusOK,
 		Data:   data,
