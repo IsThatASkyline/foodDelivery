@@ -14,7 +14,7 @@ services:
   postgresql:
     image: postgres:16-alpine
     volumes:
-      - ./order/postgres_data:/var/lib/postgresql/data #TODO: переделать на volume
+      - postgres_data:/var/lib/postgresql/data #TODO: переделать на volume
     environment:
       POSTGRES_USER: order_user
       POSTGRES_PASSWORD: order_password
