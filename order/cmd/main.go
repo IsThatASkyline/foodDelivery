@@ -28,7 +28,7 @@ func main() {
 		log.Fatalf("Failed to connect to database: %s", err)
 	}
 	defer db.Close()
-	log.Println("db Pool has been initialized")
+	log.Println("db Pool has  been initialized")
 
 	connForMigrations := stdlib.OpenDBFromPool(db)
 	if err = goose.Up(connForMigrations, cfg.DB.MigrationPath); err != nil {
